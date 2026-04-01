@@ -57,6 +57,27 @@
       letter-spacing: 0.25em; text-transform: uppercase;
       opacity: 0.7;
     }
+    /* Ticker */
+    .ticker-wrap {
+      margin-top: 56px;
+      text-align: center;
+    }
+    .ticker-number {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 52px;
+      font-weight: 200;
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+    .ticker-label {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
     /* Pages */
     .page { display: none; }
     .page.active { display: block; }
@@ -97,6 +118,8 @@
       nav a { font-size: 12px; }
       .hero h1 { font-size: 28px; letter-spacing: 3px; }
       .hero .tagline { font-size: 11px; }
+      .ticker-number { font-size: 36px; letter-spacing: 2px; }
+      .ticker-label { font-size: 10px; }
       .about-content { padding: 80px 24px; font-size: 14px; }
       .team-card { margin: 0 16px 40px; padding: 32px 28px; }
     }
@@ -114,6 +137,10 @@
     <section class="hero">
       <h1>BLUE LAKE</h1>
       <p class="tagline">THE ALTERNATIVE INCOME PLATFORM FOR REAL ESTATE</p>
+      <div class="ticker-wrap">
+        <div class="ticker-number" id="ticker">0</div>
+        <div class="ticker-label">Purchasing Intent Signals Captured</div>
+      </div>
     </section>
   </div>
 
@@ -178,6 +205,34 @@
         window.scrollTo(0, 0);
       });
     });
+
+    /* Live ticker — real data, real growth rate */
+    (function() {
+      var ANCHOR_DATE = new Date('2026-04-01T00:00:00Z').getTime();
+      var ANCHOR_COUNT = 34127856;
+      var PER_DAY = 30000;
+      var PER_MS = PER_DAY / 86400000;
+      var el = document.getElementById('ticker');
+      var displayed = 0;
+
+      function fmt(n) {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
+
+      function tick() {
+        var now = Date.now();
+        var target = Math.floor(ANCHOR_COUNT + (now - ANCHOR_DATE) * PER_MS);
+        if (displayed === 0) {
+          displayed = target;
+          el.textContent = fmt(displayed);
+        } else if (target > displayed) {
+          displayed++;
+          el.textContent = fmt(displayed);
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
   </script>
 </body>
 </html>
