@@ -211,7 +211,7 @@
     /* Live ticker — real data, real growth rate */
     (function() {
       var ANCHOR_DATE = new Date('2026-04-01T00:00:00Z').getTime();
-      var ANCHOR_COUNT = 15711329;  // BigQuery DEDUPED: unique (email + building + state) across 13 sources, 84 states
+      var ANCHOR_COUNT = 15711329;  // BigQuery DEDUPED: unique (email + building + state) across 13 sources, all 50 US states + Canada
       var PER_DAY = 21571;          // ~647K new ShowMojo leads/month, ~50% net new after dedup
       var PER_MS = PER_DAY / 86400000;
       var el = document.getElementById('ticker');
