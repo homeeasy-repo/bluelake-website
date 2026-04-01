@@ -211,7 +211,7 @@
     /* Live ticker — real data, real growth rate */
     (function() {
       var ANCHOR_DATE = new Date('2026-04-01T00:00:00Z').getTime();
-      var ANCHOR_COUNT = 25814262;  // BigQuery verified: 18.2M ShowMojo + 5.3M Marqnet + 2.3M other sources
+      var ANCHOR_COUNT = 26932119;  // BigQuery verified: 18.2M ShowMojo + 6.4M Marqnet (all states) + 2.3M other (13 sources, 84 states)
       var PER_DAY = 38071;          // 647K ShowMojo + 16.5K Marqnet + 480K other = ~1.14M/month
       var PER_MS = PER_DAY / 86400000;
       var el = document.getElementById('ticker');
